@@ -29,45 +29,6 @@ BreachBuster is an interactive cybersecurity chatbot designed to assist users in
 - **Virtual Environment** (recommended): `venv`
 - **Database**: SQLite (included in Python standard library)
 
-### Installation
-
-1. **Clone the Repository**:
-   ```
-   git clone https://github.com/muhammadumar-usman/BreachBuster.git
-   cd breachbuster
-   ```
-
-2. **Create a Virtual Environment** (recommended):
-   ```
-   python -m venv venv
-   source venv/bin/activate   # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install Dependencies**:
-   ```
-   pip install -r requirements.txt
-   ```
-
-4. **Set Up the Database**:
-   Initialize the SQLite database to create necessary tables:
-   ```
-   python initialize_db.py
-   ```
-
-### Usage
-
-1. **Run the Application**:
-   ```
-   python app.py
-   ```
-
-2. **Access the Chatbot Interface**:
-   Open a web browser and navigate to `http://127.0.0.1:5000/`.
-
-3. **Basic Commands**:
-   - Start a new session, proceed through different pentesting phases, and use the web-shell for commands.
-   - Save chat history for later review or documentation.
-
 ## Technologies Used
 
 - **Backend**: Flask, SQLite, Python
@@ -75,8 +36,8 @@ BreachBuster is an interactive cybersecurity chatbot designed to assist users in
 - **NLP**: NLTK for preprocessing and NLP-driven prompts
 - **Report Generation**: Automated reporting for comprehensive documentation
 
-
 ## Project Structure
+```
 Webapp/
 │
 ├── __pycache__/
@@ -118,4 +79,4 @@ Webapp/
 ├── users.json
 ├── webshell
 ├── requirements.txt
-
+```
