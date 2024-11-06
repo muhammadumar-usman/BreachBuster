@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kali WebShell</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+
+body {
+    background-color: #ccc; /* Change the background color to a lighter grey */
+    font-family: 'Space Grotesk', sans-serif;
+    color: #0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding-top: 50px;
+}
+
+.terminal {
+    width: 90%; /* Keep the width */
+    max-width: 1000px; /* Set maximum width for the terminal */
+    background-color: #333; /* Change the background color to grey */
+    border: 1px solid #0f0;
+    padding: 20px; /* Keep the padding */
+    margin-top: 40px; /* Keep the margin-top */
+}
+
+.terminal-output {
+    height: 400px; /* Increase the height of the terminal */
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+
+
+        .logo-ribbon {
+            width: 100%;
+            background-color: #CDCDCC;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #000000;
+            position: fixed; /* Fixed positioning to stick to the top */
+            top: 0; /* Stick to the top */
+            z-index: 1000; /* Ensure it's above other content */
+        }
+
+        #logo {
+            padding: 0 0 0 35px;
+            max-width: 250px;
+            height: auto;
+        }
+
+        #logout-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 30px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+
+        .terminal-input {
+            display: flex;
+            margin-top: 10px;
+        }
+        .terminal-input input {
+            flex: 1;
+            background-color: #000;
+            color: #0f0;
+            border: none;
+            outline: none;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .terminal-input button {
+            background-color: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo Ribbon -->
+    <div class="logo-ribbon">
+        <img id="logo" src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        <!-- Logout Button -->
+        <button id="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="terminal">
+        <div class="terminal-output" id="output"></div>
+        <div class="terminal-input">
+            <input type="text" id="commandInput" placeholder="Enter command..." autofocus>
+            <button onclick="sendCommand()">Send</button>
+            <button onclick="sendCtrlC()">Send Ctrl+C</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('connect', () => {
+            console.log('Connected to server');
+            //document.getElementById('output').textContent += 'WebShell connected\n';
+        });
+
+        socket.on('disconnect', () => {
+            console.log('Disconnected from server');
+            document.getElementById('output').textContent += 'WebShell disconnected\n';
+        });
+
+        function cleanTerminalOutput(text) {
+            // Remove ANSI escape sequences and other control characters
+            const cleanText = text.replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, '').replace(/[^\x20-\x7E\n]/g, '');
+            // Remove the shell prompt and any leading/trailing whitespace
+            const lines = cleanText.split('\n');
+            const outputLines = lines.filter(line => line.trim() !== '');
+            return outputLines.join('\n');
+        }
+
+
+socket.on('output', (data) => {
+    const outputElement = document.getElementById('output');
+    let cleanData = cleanTerminalOutput(data.data);
+
+
+    if (cleanData) {
+        outputElement.textContent += cleanData + '\n';
+        outputElement.scrollTop = outputElement.scrollHeight; // Scroll to bottom
+    }
+});
+
+
+
+
+
+
+        function sendCommand() {
+            const commandInput = document.getElementById('commandInput');
+            const command = commandInput.value.trim();
+            if (command !== '') {
+                // Print the command locally before sending it
+                const outputElement = document.getElementById('output');
+                outputElement.textContent += `umar@umar:~$ ${command}\n`;
+                outputElement.scrollTop = outputElement.scrollHeight; // Scroll to bottom
+
+                // Send the command to the server
+                socket.emit('input', { command: command });
+
+                commandInput.value = '';
+                // Add a flag to ignore the next output from the server
+                lastCommand = command;
+            }
+        }
+
+        let lastCommand = '';
+
+        function sendCtrlC() {
+            socket.emit('input', { command: '\x03' }); // Send Ctrl+C (ASCII code 3)
+        }
+
+        document.getElementById('commandInput').addEventListener('keydown', function(event)
+{
+            if (event.key === 'Enter') {
+                sendCommand();
+                event.preventDefault(); // Prevent the default behavior of submitting the form
+            }
+        });
+    </script>
+</body>
+</html>
+

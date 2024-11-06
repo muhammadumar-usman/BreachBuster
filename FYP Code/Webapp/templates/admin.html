@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #121212;
+            color: white;
+        }
+
+        .logo-ribbon {
+            width: 100%;
+            background-color: #333; /* Dark ribbon for contrast */
+            padding: 10px 0;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+            position: fixed; /* Fixes the ribbon at the top */
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensures the ribbon is above other elements */
+            text-align: center;
+        }
+
+        #logo {
+            max-width: 100px; 
+            height: auto;
+        }
+
+        #chat-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 40px); /* Adjust height considering logo height */
+            width: 100%;
+            align-items: center;
+            justify-content: flex-start; /* Align to the top */
+            padding-top: 90px; /* Add padding to top to account for the fixed ribbon */
+        }
+
+        #chat-box {
+            width: 80%;
+            max-width: 800px;
+            flex-grow: 1;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px; /* Add space between logo and chat box */
+            margin-bottom: 80px; /* Adjust so that chat box doesn't overlap with input */
+        }
+
+        #chat-output {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1.2rem; /* Larger text */
+            line-height: 1.6;
+        }
+
+        .input-container {
+            position: fixed; /* Fixed position */
+            bottom: 20px; /* Slightly above the bottom */
+            left: 50%; /* Centering */
+            transform: translateX(-50%); /* Adjust for exact center alignment */
+            width: 80%; /* Adjust to your preference */
+            max-width: 600px; /* Maximum width */
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #333;
+            background-color: #262626;
+            color: white;
+            font-size: 1.1rem; /* Larger text */
+            border-radius: 5px 0 0 5px;
+            transition: all 0.3s;
+        }
+
+        #send-btn {
+            padding: 12px 20px;
+            background-color: #A020F0;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+            font-size: 1.1rem; /* Larger text */
+            transition: all 0.3s;
+        }
+
+        #send-btn:hover {
+            background-color: #0056b3;
+        }
+
+        li {
+            margin-bottom: 10px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            #chat-box {
+                width: 95%;
+                height: 95%;
+            }
+
+            .input-container {
+                width: 95%; /* Wider on small screens */
+            }
+
+            #chat-output, #chat-input, #send-btn {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <h2>Pending Users:</h2>
+    <ul>
+        {% for user in pending_users %}
+            <li>{{ user.username }}</li>
+            <form method="POST" action="{{ url_for('admin.approve', username=user.username) }}">
+                <button type="submit">Approve</button>
+            </form>
+            <form method="POST" action="{{ url_for('admin.reject', username=user.username) }}">
+                <button type="submit">Reject</button>
+            </form>
+        {% endfor %}
+    </ul>
+
+    <h2>Approved Users:</h2>
+    <ul>
+        {% for user in approved_users %}
+            <li>{{ user.username }}</li>
+            <form method="POST" action="{{ url_for('admin.reject', username=user.username) }}">
+                <button type="submit">Reject</button>
+            </form>
+        {% endfor %}
+    </ul>
+
+    <!-- Logout Button -->
+    <form method="POST" action="{{ url_for('logout') }}">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
+

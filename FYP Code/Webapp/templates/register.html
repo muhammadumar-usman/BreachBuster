@@ -1,0 +1,96 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #CDCDCC; /* Dark grey background */
+        }
+        .register-container {
+            background-color: #CDCDCC; /* Dark grey background for the form */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Set the maximum width of the form */
+            width: 100%; /* Take full width of the container */
+            text-align: center; /* Center align contents */
+        }
+        .register-container h2 {
+            color: #333;  /* White text color */
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;  /* White color for labels */
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #555; /* Dark grey background for inputs */
+            color: #fff; /* White color for text */
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #A020F0; /* Purple background for button */
+            color: #fff; /* White text color */
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #8A2BE2; /* Darker purple on hover */
+        }
+	#logo {
+            max-width: 250px; /* Set maximum width for the logo */
+            margin-bottom: 20px; /* Spacing below the logo */
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h1><img id="logo" src="{{ url_for('static', filename='logo.png') }}" alt="Logo"></h1>
+        <h2>Register New User</h2>
+        <form method="POST" action="{{ url_for('register') }}">
+            <div class="form-group">
+                <label for="username">username</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">password</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

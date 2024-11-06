@@ -1,0 +1,11 @@
+Flask
+pandas
+numpy
+nvdlib
+pyxploitdb
+nltk
+scikit-learn
+requests
+beautifulsoup4
+Flask-SocketIO
+paramiko

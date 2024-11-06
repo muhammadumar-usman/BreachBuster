@@ -1,0 +1,26 @@
+{
+    "admin": {
+        "username": "admin",
+        "password": "1234",
+        "is_admin": true,
+        "status": "Approved"
+    },
+    "umar": {
+        "username": "umar",
+        "password": "1234",
+        "is_admin": false,
+        "status": "Pending Approval"
+    },
+    "qwe": {
+        "username": "qwe",
+        "password": "123",
+        "is_admin": false,
+        "status": "Approved"
+    },
+    "yawar": {
+        "username": "yawar",
+        "password": "1234",
+        "is_admin": false,
+        "status": "Pending Approval"
+    }
+}

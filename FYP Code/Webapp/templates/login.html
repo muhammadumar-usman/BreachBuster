@@ -1,0 +1,108 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #CDCDCC; /* Dark grey background */
+        }
+        .login-container {
+            background-color: #ccc; /* Dark grey background for the form */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Set the maximum width of the form */
+            width: 100%; /* Take full width of the container */
+            text-align: center; /* Center align contents */
+        }
+        .login-container h1 {
+            color: #333;  /* White text color */
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;  /* White color for labels */
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #555; /* Dark grey background for inputs */
+            color: #fff;  /* White color for text */
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #A020F0; /* Purple background for button */
+            color: #fff; /* White text color */
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #8A2BE2; /* Darker purple on hover */
+        }
+        .register-link {
+            margin-top: 15px;
+	    color: #333;
+        }
+        .register-link a {
+            color: #333; /* White text color for link */
+            text-decoration: underline;
+        }
+        .register-link a:hover {
+            text-decoration: none; /* Remove underline on hover */
+        }
+        #logo {
+            max-width: 250px; /* Set maximum width for the logo */
+            margin-bottom: 20px; /* Spacing below the logo */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2><img id="logo" src="{{ url_for('static', filename='logo.png') }}" alt="Logo"></h2>
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="form-group">
+                <label for="username">username</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">password</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <div class="register-link">
+            <p>New user, <a href="{{ url_for('register') }}" style="color: #333;">register here</a>.</p>
+        </div>
+    </div>
+</body>
+</html>

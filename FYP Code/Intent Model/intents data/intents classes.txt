@@ -1,0 +1,33 @@
+InputText,Intent
+================================================================================
+start,start
+next,next_phase+
+query,query+
+yes,affirmation+
+no,negation+
+end,end+
+help,help+
+
+dorks,google_dorks+
+nmap,nmap_scan+
+osint,osint_scan+
+target select,target_select+
+
+subdomains,enum_subdomains+
+components,identify_web_components+
+directory,probe_directory_and_files+
+webapp functions,enum_webapp_func+
+web tech,discover_web_tech+
+server,server_side_enum+
+select technology,select_technology+
+show,show_vulnerabilities+
+
+
+show exploits,show_exploits+
+exploit details,exploit_details+
+next exploit,next_exploit+
+
+report,generate_report+
+mitigate,show_mitigations+
+mail,mail_report+
+================================================================================

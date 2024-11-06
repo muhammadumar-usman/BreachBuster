@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BreachBuster</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='chatbot.js') }}"></script>
+</head>
+<body>
+    <!-- Logo Ribbon -->
+    <div class="logo-ribbon">
+        <img id="logo" src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+	<!-- Launch Kali Button -->
+        <button id="launch-kali-btn" onclick="launchKali()">Launch Kali</button>
+        <!-- Logout Button -->
+        <button id="logout-btn" onclick="logout()">Logout</button>
+
+   </div>
+
+    <div class="side-bar-right">
+            <!-- Sidebar content -->
+	    <p>PENTEST STAGE COLOR CODE</p>
+            <button id="scn">Scanning & Recon</button>
+            <button id="enum">Enumeration</button>
+            <button id="expl">Exploitation</button>
+            <button id="doc">Mitigation</button>
+            <a href="/download_report" download>
+            	<button id="download-report-btn">DOWNLOAD REPORT</button>
+            </a>
+	    <button id="save-chat" onclick="saveChat()">SAVE CHAT</button>
+	    <button id="new-chat" onclick="startNewChat(); newChat()">NEW CHAT</button>
+
+     </div>
+
+    <div class="side-bar-left">
+    	<!-- Sidebar content -->
+   	<p>PREVIOUS CHATS</p>
+  	<div id="chat-session-list">
+  	      <!-- Chat sessions will be dynamically loaded here -->
+    	</div>
+    		<button id="chat-load-button" onclick="loadChatSessions()">Load Chats</button>
+     </div>
+
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <div class="user-input-container">
+            <input type="text" id="user-input" placeholder="Enter prompt here" autocomplete="off" required>
+            <button onclick="sendMessage()">SEND</button>
+        </div>
+    </div>
+    <!-- Modal dialog for save confirmation -->
+    <div id="saveConfirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Your Chat has been saved successfully!</p>
+        </div>
+    </div>
+
+</body>
+</html>
