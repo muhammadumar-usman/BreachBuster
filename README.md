@@ -40,18 +40,14 @@ BreachBuster is an interactive cybersecurity chatbot designed to assist users in
 ```
 Webapp/
 │
-├── __pycache__/
-│
-├── backup/
-│
-├── js/
-│
-├── static/
+├── __pycache__/                  # Compiled Python files
+├── backup/                       # Backup files
+├── js/                           # JavaScript files
+├── static/                       # Static files (JavaScript, CSS, images)
 │   ├── chatbot.js
 │   ├── logo.png
 │   └── styles.css
-│
-├── templates/
+├── templates/                    # HTML templates
 │   ├── admin.html
 │   ├── chatbot.html
 │   ├── home.html
@@ -59,24 +55,24 @@ Webapp/
 │   ├── register.html
 │   ├── session_history.html
 │   └── webshell.html
-│
-├── admin
-├── chat_history.db
-├── cve_exploit_search
-├── database
-├── error
-├── exploits_and_vulnerabilities_scraper
-├── intent_model.pkl
-├── intent_model
-├── intents.xlsx
-├── logo.png
-├── main.py
-├── pentesting_report.pdf
-├── phase_responses.json
-├── pt_report_generate
-├── test
-├── url_validator
-├── users.json
-├── webshell
-├── requirements.txt
+├── admin                         # Admin module
+├── chat_history.db               # SQLite database file
+├── cve_exploit_search            # Module for CVE search and exploit handling
+├── database                      # Database initialization and management
+├── error                         # Error handling
+├── exploits_and_vulnerabilities_scraper # Web scraper for exploits and vulnerabilities
+├── intent_model.pkl              # Serialized intent model for NLP
+├── intent_model                  # Intent model code and training
+├── intents.xlsx                  # Intent data file for training
+├── logo.png                      # Logo file
+├── main.py                       # Main application script
+├── pentesting_report.pdf         # Sample pentesting report
+├── phase_responses.json          # JSON file containing phase responses
+├── pt_report_generate            # Report generation module
+├── test                          # Test scripts and unit tests
+├── url_validator                 # URL validation scripts
+├── users.json                    # JSON file for user data
+├── webshell                      # Web shell functionality
+└── requirements.txt              # Project dependencies
+
 ```
