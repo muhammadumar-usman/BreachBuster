@@ -33,7 +33,7 @@ BreachBuster is an interactive cybersecurity chatbot designed to assist users in
 
 1. **Clone the Repository**:
    ```
-   git clone https://github.com/your-username/breachbuster.git
+   git clone https://github.com/muhammadumar-usman/BreachBuster.git
    cd breachbuster
    ```
 
