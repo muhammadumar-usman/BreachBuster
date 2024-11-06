@@ -12,7 +12,7 @@ BreachBuster is an interactive cybersecurity chatbot designed to assist users in
 - [Installation](#installation)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
-
+- [Project Structure](#project-structure)
 
 ## Features
 
@@ -74,4 +74,48 @@ BreachBuster is an interactive cybersecurity chatbot designed to assist users in
 - **Frontend**: HTML, CSS, JavaScript (jQuery)
 - **NLP**: NLTK for preprocessing and NLP-driven prompts
 - **Report Generation**: Automated reporting for comprehensive documentation
+
+
+## Project Structure
+Webapp/
+│
+├── __pycache__/
+│
+├── backup/
+│
+├── js/
+│
+├── static/
+│   ├── chatbot.js
+│   ├── logo.png
+│   └── styles.css
+│
+├── templates/
+│   ├── admin.html
+│   ├── chatbot.html
+│   ├── home.html
+│   ├── login.html
+│   ├── register.html
+│   ├── session_history.html
+│   └── webshell.html
+│
+├── admin
+├── chat_history.db
+├── cve_exploit_search
+├── database
+├── error
+├── exploits_and_vulnerabilities_scraper
+├── intent_model.pkl
+├── intent_model
+├── intents.xlsx
+├── logo.png
+├── main.py
+├── pentesting_report.pdf
+├── phase_responses.json
+├── pt_report_generate
+├── test
+├── url_validator
+├── users.json
+├── webshell
+├── requirements.txt
 
